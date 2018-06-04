@@ -8,7 +8,7 @@ const path = require("path");
 
 
 
-const db = require("./models");
+// const db = require("./models");
 
 const PORT = 3000;
 

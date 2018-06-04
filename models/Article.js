@@ -7,7 +7,8 @@ const ArticlSchema = new Schema({
     title: {
         type: String,
         required: true,
-        trim:true
+        trim:true,
+        unique: "Duplicate Article Title"
     },
     summary:{
         type:String
