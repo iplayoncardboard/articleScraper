@@ -18,30 +18,9 @@ router.get('/', (req, res)=>{
         {
             res.json(err);
         }
-    })
+    });
 });
 
-
-// router.get("/", function(req, res) {
-//     cat.all(function(data) {
-//       var hbsObject = {
-//         cats: data
-//       };
-//       console.log(hbsObject);
-//       res.render("index", hbsObject);
-//     });
-//   });
-
-
-// db.Article.find({})
-// .then(function(dbArticle) {
-//   // If we were able to successfully find Articles, send them back to the client
-//   res.json(dbArticle);
-// })
-// .catch(function(err) {
-//   // If an error occurred, send it to the client
-//   res.json(err);
-// });
 
 router.get('/scrape', (req, res)=>{
     axios.get("http://www.dicetowernews.com/").then((response)=>{

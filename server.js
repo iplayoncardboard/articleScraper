@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const indexRoutes = require('./routes/index');
+const articleRoutes = require('./routes/articles');
+// const routes = require('./routes/');
 const exphbs = require("express-handlebars");
 const path = require("path");
 
@@ -37,6 +39,7 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(indexRoutes);
+app.use(articleRoutes)
 
 app.listen(PORT, () => {
 console.log("Server listening on: http://localhost:" + PORT)}); 
