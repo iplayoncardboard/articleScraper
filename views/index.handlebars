@@ -1,10 +1,7 @@
-
-
+<div class="ui inverted vertical masthead center aligned segment">
 <h1>Sup World</h1>
-<div>
-    <ul>
-        {{#each article}}
-            <li>ID: {{_id}} Title: {{title}}</li>
-        {{/each}}
-    </ul>
 </div>
+<div class="ui vertical stripe segment">
+    {{>articles}}
+</div>
+

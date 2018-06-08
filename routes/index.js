@@ -7,8 +7,8 @@ var db = require("../models");
 router.get('/', (req, res)=>{
 
     //get the articles from the DB
-    db.Article.find({}).then((dbArticle)=>{
-        // res.json(dbArticle);
+    db.Article.find({}).sort({createdDate:1}).then((dbArticle)=>{
+        // res.json(dbArticle);s
          //create a handlebars object containing articles 
         let hbsObject = {article:dbArticle}
         //and send it to HBS on the index route
@@ -38,21 +38,33 @@ router.get('/scrape', (req, res)=>{
 
             result.title = $(this).children("a, .entry-title").text();
             result.summary = $(this).text();
-          
-            db.Article.create(result)
-            .then((dbArticle)=>{
-                console.log(dbArticle);
-                res.redirect("/");
-            })
-            .catch((err)=>{
-                if(err){
-                    return res.json(err);
+            result.url = $(this).children("a, .entry-title").children("a").attr("href");
+            result.saved = false;
+            try{db.Article.create(result)
+                .then((dbArticle)=>{
+                    res.redirect("/");
+                })}
+            catch(error) {
+                console.error(error);
+                // expected output: SyntaxError: unterminated string literal
+                // Note - error messages will vary depending on browser
                 }
-            });
+            
+            // .catch((err)=>{
+            //     if(err){
+            //         console.log(err);
+            //     }
+            // });
 
         });
-    
-    
+    });
+});
+
+
+router.get('/saved',(req, res)=>{
+    db.Article.find({saved:true}).sort({createdDate:1}).then((dbArticle)=>{
+        let hbsObject = {article:dbArticle}
+        res.render('saved',hbsObject);
     });
 });
 

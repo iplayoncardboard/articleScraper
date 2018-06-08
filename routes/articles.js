@@ -27,13 +27,13 @@ router.get('/articles/:id',(req,res)=>{
         {
             res.json(err);
         }
-    });;
+    });
 });
 
-router.delete("/note/:id",(req,res)=>{
-    db.Article.deleteOne({id:req.params.id}).then(()=>{
+router.put("/articles/:id",(req,res)=>{
+    db.Article.update({_id:req.params.id},{$set:{saved:true}}).then((dbArticle)=>{
         //Will need to change redirect path
-        res.redirect('/');
+        res.json(dbArticle);
     })
     .catch((err)=>{
         if(err){
@@ -41,5 +41,17 @@ router.delete("/note/:id",(req,res)=>{
         }
     });
 });
+
+// router.delete("/articles/:id",(req,res)=>{
+//     db.Article.deleteOne({id:req.params.id}).then(()=>{
+//         //Will need to change redirect path
+//         res.redirect('/');
+//     })
+//     .catch((err)=>{
+//         if(err){
+//             res.json(err);
+//         }
+//     });
+// });
 
 module.exports = router;

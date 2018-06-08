@@ -22,8 +22,12 @@ const ArticleSchema = new Schema({
         default: Date.now
       },
       saved:{
-        saved: Boolean,
+        type: Boolean,
         default: false
+      },
+      url: {
+        type: String,
+        required: true
       }
 });
 

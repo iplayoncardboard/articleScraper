@@ -1,0 +1,24 @@
+
+
+ <div class="ui grid">
+<div class="ui cards">
+    {{#each article}}
+ <div data-mongo={{_id}} class="card">
+    <div class="content">
+      <div class="header">
+        <a href={{url}} target="_blank">{{title}}</a>
+      </div>
+      <div class="description">
+        {{summary}}
+      </div>
+    </div>
+    <div class="extra content">
+      <div class="ui two buttons">
+        <div class="ui basic green button btn-article-save" data-mongo={{_id}} >Save</div>
+        <div class="ui basic red button btn-article-delete" data-mongo={{_id}} >Delete</div>
+      </div>
+    </div>
+  </div>
+    {{/each}}
+</div>
+</div>

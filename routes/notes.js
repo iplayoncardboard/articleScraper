@@ -8,7 +8,7 @@ router.get("/note", (req,res)=>{
     });
 });
 
-router.put("/note", (req,res)=>{
+router.post("/note", (req,res)=>{
     db.Note.create(req.body).then((dbArticle)=>{
         res.json.dbArticle;
     }

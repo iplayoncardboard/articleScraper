@@ -31,7 +31,10 @@ app.use(express.static("public"));
 mongoose.connect("mongodb://localhost/articleScraper");
 
 // Set Handlebars.
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "main", partialsDir: [
+    //  path to your partials
+    __dirname + '/views/partials',
+] }));
 app.set("view engine", "handlebars");
 
 
