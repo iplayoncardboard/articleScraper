@@ -28,9 +28,11 @@ $(function() {
             method: "PUT",
             url: "/articles/"+event.target.dataset.mongo
           }).then(
-            function() {
+            (res)=> {
             //   location.assign('/saved');
               console.log(event.target.dataset.mongo);
+              console.log(res);
+              $('.ui.modal').modal('show');
             }
           )
     });
@@ -66,6 +68,17 @@ $(function() {
               location.assign('/saved');
             }
           )
+    });
+
+    $(".header").on('click', (event)=>{
+      $.ajax({
+        method: 'GET',
+        url: '/articles/'+ event.target.dataset.mongo
+      }).then((res)=>{
+        console.log(event.target.dataset.mongo);
+        console.log(res);
+        location.assign(`/articles/${event.target.dataset.mongo}`);
+      });
     });
 
 });

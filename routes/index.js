@@ -7,7 +7,7 @@ var db = require("../models");
 router.get('/', (req, res)=>{
 
     //get the articles from the DB
-    db.Article.find({}).sort({createdDate:1}).then((dbArticle)=>{
+    db.Article.find({}).sort({createdDate:-1}).then((dbArticle)=>{
         // res.json(dbArticle);s
          //create a handlebars object containing articles 
         let hbsObject = {article:dbArticle}

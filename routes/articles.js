@@ -21,7 +21,10 @@ router.get('/articles',(req,res)=>{
 router.get('/articles/:id',(req,res)=>{
     console.log(req.params.id);
     db.Article.find({_id: req.params.id}).then((dbArticle)=>{
-        res.json(dbArticle);
+        // res.json(dbArticle);
+        console.log(dbArticle)
+        let hbsObject = {article:dbArticle}
+        res.render('article',hbsObject)
     }).catch((err)=>{
         if(err)
         {

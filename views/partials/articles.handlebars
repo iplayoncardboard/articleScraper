@@ -5,8 +5,8 @@
     {{#each article}}
  <div data-mongo={{_id}} class="card">
     <div class="content">
-      <div class="header">
-        <a href={{url}} target="_blank">{{title}}</a>
+      <div class="header" >
+        <p data-mongo={{_id}}>{{title}}</p>
       </div>
       <div class="description">
         {{summary}}
