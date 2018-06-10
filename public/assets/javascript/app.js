@@ -90,8 +90,9 @@ $(function() {
         )
   });
 
-  $('.btn-note-add').on('click', function (event){
-    event.preventDefault();
+  $('#make-note').on('click', function (event){
+    // event.preventDefault();
+    console.log("click");
     $.ajax({
         method: "POST",
         url: "/note/"+event.target.dataset.id
@@ -102,6 +103,9 @@ $(function() {
       )
 });
     
+$(".add-note").on('click', (event)=>{
+  $('#form-modal').modal('show');
+});
 
     $(".header").on('click', (event)=>{
       $.ajax({

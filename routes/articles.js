@@ -5,6 +5,7 @@ var db = require("../models");
 router.get('/articles',(req,res)=>{
     db.Article.find({}).then((dbArticle)=>{
         // res.json(dbArticle);
+      
          //create a handlebars object containing articles 
         let hbsObject = {article:dbArticle}
         //and send it to HBS on the index route
@@ -17,6 +18,21 @@ router.get('/articles',(req,res)=>{
     });
 });
 
+router.get('/articles/:id',(req,res)=>{
+    db.Article.find({_id:req.params.id}).then((dbArticle)=>{
+        // res.json(dbArticle);
+        console.log("HERES THE SHIT" + JSON.stringify(dbArticle));
+         //create a handlebars object containing articles 
+        let hbsObject = {article:dbArticle}
+        //and send it to HBS on the index route
+        res.render("article", hbsObject);
+    }).catch((err)=>{
+        if(err)
+        {
+            res.json(err);
+        }
+    });
+});
 
 router.get('/articles/:id/notes',(req,res)=>{
     console.log(req.params.id);
