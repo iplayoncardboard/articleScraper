@@ -6,8 +6,7 @@ $(function() {
             url: "/scrape"
           }).then(
             function() {
-            location.assign('/');
-            console.log("Scrape Success");
+            location.reload(true);
             }
           )
     });
@@ -23,6 +22,18 @@ $(function() {
           )
     });
 
+    $('.home-button').on('click', function (event){
+      $.ajax({
+          method: "GET",
+          url: "/"
+        }).then(
+          function() {
+            location.assign('/');
+          }
+        )
+  });
+    
+
     $('.btn-article-save').on('click', function (event){
         $.ajax({
             method: "PUT",
@@ -30,8 +41,8 @@ $(function() {
           }).then(
             (res)=> {
             //   location.assign('/saved');
-              console.log(event.target.dataset.mongo);
-              console.log(res);
+              // console.log(event.target.dataset.mongo);
+              // console.log(res);
               $('.ui.modal').modal('show');
             }
           )
@@ -39,11 +50,11 @@ $(function() {
 
     $('.btn-article-delete').on('click', function (event){
         $.ajax({
-            method: "POST",
-            url: "/article"
+            method: "PUT",
+            url: "/articles/"+event.target.dataset.mongo+"/remove"
           }).then(
-            function() {
-              location.assign('/saved');
+            () => {
+              $('.ui.modal').modal('show');
             }
           )
     });
@@ -70,6 +81,20 @@ $(function() {
           )
     });
 
+
+    $('.btn-note-save').on('click', function (event){
+      $.ajax({
+          method: "POST",
+          url: "/"
+        }).then(
+          function() {
+            location.assign('/saved');
+          }
+        )
+  });
+
+    
+
     $(".header").on('click', (event)=>{
       $.ajax({
         method: 'GET',
@@ -80,5 +105,10 @@ $(function() {
         location.assign(`/articles/${event.target.dataset.mongo}`);
       });
     });
+
+
+    $('#model-close').on("click",event=>{
+      location.reload(true);
+    })
 
 });

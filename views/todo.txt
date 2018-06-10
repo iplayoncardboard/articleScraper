@@ -1,0 +1,5 @@
+Add logic to put green buttons if saved is true red buttons if saved is false
+
+add logice to make notes, 
+add logic to remove notes
+add visual to show notes

@@ -45,6 +45,19 @@ router.put("/articles/:id",(req,res)=>{
     });
 });
 
+router.put("/articles/:id/remove",(req,res)=>{
+    db.Article.update({_id:req.params.id},{$set:{saved:false}}).then((dbArticle)=>{
+        //Will need to change redirect path
+        res.json(dbArticle);
+    })
+    .catch((err)=>{
+        if(err){
+            res.json(err);
+        }
+    });
+});
+
+
 // router.delete("/articles/:id",(req,res)=>{
 //     db.Article.deleteOne({id:req.params.id}).then(()=>{
 //         //Will need to change redirect path

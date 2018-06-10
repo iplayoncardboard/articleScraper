@@ -1,24 +1,28 @@
 
 
- <div class="ui grid">
-<div class="ui cards">
-    {{#each article}}
- <div data-mongo={{_id}} class="card">
-    <div class="content">
-      <div class="header" >
-        <p data-mongo={{_id}}>{{title}}</p>
+<div class="ui grid">
+  <div class="ui cards">
+      {{#each article}}
+  <div data-mongo={{_id}} class="card">
+      <div class="content">
+        <div class="header" >
+          <p data-mongo={{_id}}>{{title}}</p>
+        </div>
+        <div class="description">
+          {{summary}}
+        </div>
       </div>
-      <div class="description">
-        {{summary}}
+      <div class="extra content">
+        <div class="ui two buttons">
+          {{#if saved}}
+          <div class="ui basic red button btn-article-delete" data-mongo={{_id}} >Remove</div>
+          {{else}}
+          <div class="ui basic green button btn-article-save" data-mongo={{_id}} >Save</div>
+          {{/if}}
+          <div class="ui basic blue button btn-note-save" data-mongo={{_id}} >Note</div>
+        </div>
       </div>
     </div>
-    <div class="extra content">
-      <div class="ui two buttons">
-        <div class="ui basic green button btn-article-save" data-mongo={{_id}} >Save</div>
-        <div class="ui basic red button btn-article-delete" data-mongo={{_id}} >Delete</div>
-      </div>
-    </div>
+      {{/each}}
   </div>
-    {{/each}}
-</div>
 </div>
