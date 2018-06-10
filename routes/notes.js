@@ -8,16 +8,19 @@ router.get("/note", (req,res)=>{
     });
 });
 
-router.post("/note", (req,res)=>{
-    db.Note.create(req.body).then((dbArticle)=>{
-        res.json.dbArticle;
-    }
-    ).catch((err)=>{
-        if(err){
-            res.json(err);
-        }
-    });
-});
+
+app.post("/notes/:id", function(req, res) {
+    db.Note.create(req.body)
+      .then(function(dbNote) {
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, {$push:{notes: dbNote._id }},{ new: true });
+      })
+      .then(function(dbArticle) {
+        res.json(dbArticle);
+      })
+      .catch(function(err) {
+        res.json(err);
+      });
+  });
 
 router.get("/note/:id", (req,res)=>{
     

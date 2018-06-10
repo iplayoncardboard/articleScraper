@@ -20,7 +20,7 @@ router.get('/articles',(req,res)=>{
 
 router.get('/articles/:id',(req,res)=>{
     console.log(req.params.id);
-    db.Article.find({_id: req.params.id}).then((dbArticle)=>{
+    db.Article.findOne({_id: req.params.id}).populate("note").then((dbArticle)=>{
         // res.json(dbArticle);
         console.log(dbArticle)
         let hbsObject = {article:dbArticle}
@@ -56,6 +56,8 @@ router.put("/articles/:id/remove",(req,res)=>{
         }
     });
 });
+
+
 
 
 // router.delete("/articles/:id",(req,res)=>{

@@ -43,7 +43,7 @@ $(function() {
             //   location.assign('/saved');
               // console.log(event.target.dataset.mongo);
               // console.log(res);
-              $('.ui.modal').modal('show');
+              $('#save-modal').modal('show');
             }
           )
     });
@@ -54,7 +54,7 @@ $(function() {
             url: "/articles/"+event.target.dataset.mongo+"/remove"
           }).then(
             () => {
-              $('.ui.modal').modal('show');
+              $('#remove-modal').modal('show');
             }
           )
     });
@@ -107,7 +107,7 @@ $(function() {
     });
 
 
-    $('#model-close').on("click",event=>{
+    $('.model-close').on("click",event=>{
       location.reload(true);
     })
 
