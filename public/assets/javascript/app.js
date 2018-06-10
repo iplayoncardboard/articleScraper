@@ -59,17 +59,6 @@ $(function() {
           )
     });
 
-    $('.btn-save-note').on('click', function (event){
-        $.ajax({
-            method: "POST",
-            url: "/"
-          }).then(
-            function() {
-              location.assign('/saved');
-            }
-          )
-    });
-
     $('.btn-delete-note').on('click', function (event){
         $.ajax({
             method: "POST",
@@ -84,15 +73,34 @@ $(function() {
 
     $('.btn-note-save').on('click', function (event){
       $.ajax({
-          method: "POST",
-          url: "/"
+          method: "GET",
+          url: "/articles/"+event.target.dataset.mongo+"/notes"
         }).then(
-          function() {
-            location.assign('/saved');
+          function(response) {
+            console.log(response);
+            response.notes.forEach(note=>{
+              let noteDiv = $("div")
+              nodeDiv.addClass("noteID", note._id)
+              noteDiv.text(note.content);
+              $(".notesContainer").append(noteDiv);
+            })
+            $('.btn-note-add').attr('data-id', response._id);
+            $('#form-modal').modal('show');
           }
         )
   });
 
+  $('.btn-note-add').on('click', function (event){
+    event.preventDefault();
+    $.ajax({
+        method: "POST",
+        url: "/note/"+event.target.dataset.id
+      }).then(
+        function(response) {
+          console.log(response);
+        }
+      )
+});
     
 
     $(".header").on('click', (event)=>{

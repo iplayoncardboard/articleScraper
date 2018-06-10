@@ -4,6 +4,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const indexRoutes = require('./routes/index');
 const articleRoutes = require('./routes/articles');
+const noteRoutes = require('./routes/notes');
 // const routes = require('./routes/');
 const exphbs = require("express-handlebars");
 const path = require("path");
@@ -50,7 +51,8 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(indexRoutes);
-app.use(articleRoutes)
+app.use(articleRoutes);
+app.use(noteRoutes);
 
 app.listen(PORT, () => {
 console.log("Server listening on: http://localhost:" + PORT)}); 

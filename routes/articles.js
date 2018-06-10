@@ -18,13 +18,14 @@ router.get('/articles',(req,res)=>{
 });
 
 
-router.get('/articles/:id',(req,res)=>{
+router.get('/articles/:id/notes',(req,res)=>{
     console.log(req.params.id);
     db.Article.findOne({_id: req.params.id}).populate("note").then((dbArticle)=>{
         // res.json(dbArticle);
         console.log(dbArticle)
-        let hbsObject = {article:dbArticle}
-        res.render('article',hbsObject)
+        // let hbsObject = {article:dbArticle}
+        // res.render('article',hbsObject)
+        res.json(dbArticle)
     }).catch((err)=>{
         if(err)
         {
