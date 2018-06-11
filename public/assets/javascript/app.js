@@ -120,8 +120,8 @@ $(function() {
           noteDiv.addClass('noteDiv')
           //create note content 
 
-          let content = $(`<div class="ui positive message">
-          <i class="close icon"></i>
+          let content = $(`<div id=${note._id} class="ui positive message">
+          <i class="close icon x-button" data-noteid=${note._id}></i>
           <div class="header">
             Note ${index+1}
           </div>
@@ -138,5 +138,17 @@ $(function() {
     $('.model-close').on("click",event=>{
       location.reload(true);
     })
+
+    //Delete note
+    $(document).on('click','.x-button',(event)=>{
+        console.log(event.target.dataset.noteid);
+      $.ajax({
+        method: 'POST',
+        url: '/notes/'+ event.target.dataset.noteid
+      }).then((res)=>{
+        $(`#${event.target.dataset.noteid}`).remove();
+        
+      })
+    });
 
 });
