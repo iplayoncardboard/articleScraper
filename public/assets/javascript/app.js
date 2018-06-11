@@ -11,6 +11,7 @@ $(function() {
           )
     });
 
+    //Navigate to saved articles page
     $('.saved-button').on('click', function (event){
         $.ajax({
             method: "GET",
@@ -21,7 +22,7 @@ $(function() {
             }
           )
     });
-
+//Navigate to home page
     $('.home-button').on('click', function (event){
       $.ajax({
           method: "GET",
@@ -33,21 +34,18 @@ $(function() {
         )
   });
     
-
+//Add article to saved articles list
     $('.btn-article-save').on('click', function (event){
         $.ajax({
             method: "PUT",
             url: "/articles/"+event.target.dataset.mongo
           }).then(
             (res)=> {
-            //   location.assign('/saved');
-              // console.log(event.target.dataset.mongo);
-              // console.log(res);
               $('#save-modal').modal('show');
             }
-          )
+          ) 
     });
-
+//Remove article from saved articles
     $('.btn-article-delete').on('click', function (event){
         $.ajax({
             method: "PUT",
@@ -59,18 +57,8 @@ $(function() {
           )
     });
 
-    $('.btn-delete-note').on('click', function (event){
-        $.ajax({
-            method: "POST",
-            url: "/"
-          }).then(
-            function() {
-              location.assign('/saved');
-            }
-          )
-    });
 
-
+//Save a note
     $('.btn-note-save').on('click', function (event){
       $.ajax({
           method: "GET",
@@ -102,23 +90,28 @@ $(function() {
         }
       )
 });
-    
-$(".add-note").on('click', (event)=>{
-  $('#form-modal').modal('show');
-});
 
+//FINISH THIS
+  $(document).on('click','.btn-note-add',()=>{
+    $.ajax({
+      method: "POST",
+      url: "/note/"+event.target.dataset.id
+  });
+
+
+//When article title is clicked
     $(".header").on('click', (event)=>{
       $.ajax({
         method: 'GET',
         url: '/articles/'+ event.target.dataset.mongo
       }).then((res)=>{
-        console.log(event.target.dataset.mongo);
-        console.log(res);
-        location.assign(`/articles/${event.target.dataset.mongo}`);
+        $('.btn-note-add').attr('data-id', res._id);
+        $('#form-modal').modal('show');
       });
     });
+   
 
-
+    //close model
     $('.model-close').on("click",event=>{
       location.reload(true);
     })
