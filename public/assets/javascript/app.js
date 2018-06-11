@@ -71,7 +71,7 @@ $(function() {
               nodeDiv.addClass("noteID", note._id)
               noteDiv.text(note.content);
               $(".notesContainer").append(noteDiv);
-            })
+            });
             $('.btn-note-add').attr('data-id', response._id);
             $('#form-modal').modal('show');
           }
@@ -91,16 +91,26 @@ $(function() {
       )
 });
 
-//FINISH THIS
-  $(document).on('click','.btn-note-add',()=>{
+
+  $('.btn-note-add').on('click',function (event){
+    event.preventDefault();
+    let thisId = event.target.dataset.id;
+    // alert(JSON.stringify(event.target.dataset.id));
     $.ajax({
       method: "POST",
-      url: "/note/"+event.target.dataset.id
+      url: "/articles/"+thisId,
+      data: {
+        // Value taken from title input
+        content: $("#content").val()
+      }
+  }).then((data)=>{
+    $('.notesContainer').append(`<h2>${data.title}</h2>`);
   });
-
+});
+  
 
 //When article title is clicked
-    $(".header").on('click', (event)=>{
+    $(document).on('click',".header", (event)=>{
       $.ajax({
         method: 'GET',
         url: '/articles/'+ event.target.dataset.mongo
@@ -114,6 +124,6 @@ $(function() {
     //close model
     $('.model-close').on("click",event=>{
       location.reload(true);
-    })
+    });
 
 });

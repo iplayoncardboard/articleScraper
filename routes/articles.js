@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 var db = require("../models");
 
+router.post('/test',(req,res)=>{
+    console.log(JSON.stringify(req.body));
+})
+
+
 router.get('/articles',(req,res)=>{
     db.Article.find({}).then((dbArticle)=>{
         // res.json(dbArticle);
@@ -28,14 +33,17 @@ router.get("/articles/:id", function(req, res) {
       .catch(function(err) {
         res.json(err);
       });
-  });
+  });   
 
 // Route for saving/updating an Article's associated Note
 router.post("/articles/:id", function(req, res) {
+    console.log('BODY' +JSON.stringify(req.body));
+    console.log('params' +JSON.stringify(req.params.id));
     // Create a new note and pass the req.body to the entry
     db.Note.create(req.body)
-      .then(function(dbNote) {
-        return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+    .then(function(dbNote) {
+        console.log("NOTE"+JSON.stringify(dbNote));
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, { notes: dbNote._id }, { new: true });
       })
       .then(function(dbArticle) {
         // If we were able to successfully update an Article, send it back to the client
