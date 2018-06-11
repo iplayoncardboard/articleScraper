@@ -26,7 +26,7 @@ router.get('/articles',(req,res)=>{
 //Grab an article
 router.get("/articles/:id", function(req, res) {
     db.Article.findOne({ _id: req.params.id })
-      .populate("note")
+      .populate("notes")
       .then(function(dbArticle) {
         res.json(dbArticle);
       })
@@ -43,7 +43,7 @@ router.post("/articles/:id", function(req, res) {
     db.Note.create(req.body)
     .then(function(dbNote) {
         console.log("NOTE"+JSON.stringify(dbNote));
-        return db.Article.findOneAndUpdate({ _id: req.params.id }, { notes: dbNote._id }, { new: true });
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, {$push:{ notes: dbNote._id }}, { new: true });
       })
       .then(function(dbArticle) {
         // If we were able to successfully update an Article, send it back to the client
