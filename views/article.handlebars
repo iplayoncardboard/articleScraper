@@ -1,7 +1,32 @@
 <div class="ui vertical stripe segment">
+  {{#each article}}
     <div class="ui text container">
       <h3 class="ui header">{{title}}</h3>
       <p>{{summary}}</p>
+       {{#each notes}}
+       <div>
+         <h4>Note</h4>
+         <p>{{content}}</p>
+       </div>
+       {{/each}}
       <a class="ui large button add-note">Add Note</a>
     </div>
+    {{/each}}
 </div>
+
+
+
+  {{!-- <i class="close icon"></i> --}}
+  <div class="image content">
+      <div class="ui header">Enter A Note</div>
+  </div>
+  <div class="notesContainer">
+
+  </div>
+  <form class="ui form">
+    <div class="field">
+      <label>Short Text</label>
+      <textarea name="content" rows="2"></textarea>
+      <button id="make-note" data-mongo={{article._id}} class="ui basic blue button btn-note-add" type="submit">Add a Note</button>
+    </div>
+  </form>

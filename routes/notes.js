@@ -12,17 +12,16 @@ router.get("/note", (req,res)=>{
 router.post("/note/:id", function(req, res) {
     console.log(`BODY ${JSON.stringify(req.body)}`);
     console.log(`ID ${req.params.id}` )
-
-    // db.Note.create(req.body)
-    //   .then(function(dbNote) {
-    //     return db.Article.findOneAndUpdate({ _id: req.params.id }, {$push:{notes: dbNote._id }},{ new: true });
-    //   })
-    //   .then(function(dbArticle) {
-    //     res.json(dbArticle);
-    //   })
-    //   .catch(function(err) {
-    //     res.json(err);
-    //   });
+    db.Note.create(req.body)
+      .then(function(dbNote) {
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, {$push:{notes: dbNote._id }},{ new: true });
+      })
+      .then(function(dbArticle) {
+        res.json(dbArticle);
+      })
+      .catch(function(err) {
+        res.json(err);
+      });
   });
 
 router.get("/note/:id", (req,res)=>{
