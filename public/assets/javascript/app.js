@@ -114,12 +114,18 @@ $(function() {
       }).then((res)=>{
         // console.log(event.target.dataset.mongo);
         console.log(res.notes);
-        res.notes.forEach((note)=>{
+        res.notes.forEach((note,index)=>{
           //create the note container div
           let noteDiv = $('<div></div>')
           noteDiv.addClass('noteDiv')
-          //create note content
-          let content = $(`<p> ${note.content}</p>`);
+          //create note content 
+
+          let content = $(`<div class="ui positive message">
+          <i class="close icon"></i>
+          <div class="header">
+            Note ${index+1}
+          </div>
+          <p>${note.content}.</p></div>`);
           content.appendTo(noteDiv);
           noteDiv.appendTo('.notesContainer');
         });
