@@ -1,24 +1,28 @@
+
+<div class="ui inverted vertical masthead center aligned segment">
+<h1 class="ui inverted header">Gaming News</h1>
+</div>
 <div class="ui vertical stripe segment">
-        <div class="ui grid">
-    <div class="ui cards">
-        {{#each article}}
-    <div data-id={{_id}} class="card">
-        <div class="content">
-        <div class="header" data-mongo={{_id}}>
-            <p>{{title}}</p>
+
+<div class="ui grid">
+  <div class="ui cards">
+      {{#each article}}
+  <div data-mongo={{_id}} class="card">
+      <div class="content">
+        <div class="header" >
+          <p data-mongo={{_id}}>{{title}}</p>
         </div>
         <div class="description">
-            {{summary}}
+          {{summary}}
         </div>
-        </div>
-        <div class="extra content">
-        <div class="ui two buttons">
-            <div class="ui basic green button save btn-save-note" data-id={{_id}} >Save</div>
-            <div class="ui basic red button delete btn-delete-note" data-id={{_id}} >Delete</div>
-        </div>
-        </div>
+      </div>
+      <div class="extra content">
+               <a href="{{url}}" target="_blank"><div class="ui basic blue button btn-article-open" >Read</div></a>
+
+      </div>
     </div>
-        {{/each}}
-    </div>
-    </div>
+      {{/each}}
+  </div>
+</div>
+
 </div>

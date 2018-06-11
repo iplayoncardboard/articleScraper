@@ -71,24 +71,7 @@ $(function() {
     });
 
 
-    $('.btn-note-save').on('click', function (event){
-      $.ajax({
-          method: "GET",
-          url: "/articles/"+event.target.dataset.mongo+"/notes"
-        }).then(
-          function(response) {
-            console.log(response);
-            response.notes.forEach(note=>{
-              let noteDiv = $("div")
-              nodeDiv.addClass("noteID", note._id)
-              noteDiv.text(note.content);
-              $(".notesContainer").append(noteDiv);
-            })
-            $('.btn-note-add').attr('data-id', response._id);
-            $('#form-modal').modal('show');
-          }
-        )
-  });
+
 
   $('.btn-note-add').on('click',function (event){
     event.preventDefault();
@@ -101,8 +84,19 @@ $(function() {
         // Value taken from title input
         content: $("#content").val()
       }
-  }).then((data)=>{
-    $('.notesContainer').append(`<h2>${data.title}</h2>`);
+  }).then((res)=>{
+    
+    let noteDiv = $('<div></div>')
+          console.log(res)
+          noteDiv.addClass('noteDiv')
+          //create note content
+          let content = $(`<div  class="ui positive message">
+          <div class="header">
+            New Note
+          </div>
+          <p>${$("#content").val()}.</p></div>`);
+          content.appendTo(noteDiv);
+          noteDiv.appendTo('.notesContainer');
   });
 });
     
@@ -120,10 +114,10 @@ $(function() {
           noteDiv.addClass('noteDiv')
           //create note content 
 
-          let content = $(`<div id=${note._id} class="ui positive message">
+          let content = $(`<div id=${note._id} class="ui teal message">
           <i class="close icon x-button" data-noteid=${note._id}></i>
           <div class="header">
-            Note ${index+1}
+            Note
           </div>
           <p>${note.content}.</p></div>`);
           content.appendTo(noteDiv);
