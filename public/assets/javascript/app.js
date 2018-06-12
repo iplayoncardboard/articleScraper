@@ -128,6 +128,33 @@ $(function() {
       });
     });
 
+    $(".btn-note-save").on('click', (event)=>{
+      $.ajax({
+        method: 'GET',
+        url: '/articles/'+ event.target.dataset.mongo
+      }).then((res)=>{
+        // console.log(event.target.dataset.mongo);
+        console.log(res.notes);
+        res.notes.forEach((note,index)=>{
+          //create the note container div
+          let noteDiv = $('<div></div>')
+          noteDiv.addClass('noteDiv')
+          //create note content 
+
+          let content = $(`<div id=${note._id} class="ui teal message">
+          <i class="close icon x-button" data-noteid=${note._id}></i>
+          <div class="header">
+            Note
+          </div>
+          <p>${note.content}.</p></div>`);
+          content.appendTo(noteDiv);
+          noteDiv.appendTo('.notesContainer');
+        });
+        $('.btn-note-add').attr('data-id', res._id);
+        $('#form-modal').modal('show');
+      });
+    });
+
 
     $('.model-close').on("click",event=>{
       location.reload(true);
